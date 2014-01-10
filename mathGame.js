@@ -6,24 +6,82 @@ var player1 = new function () {
 	}
 }
 
-function getName() {
-	return prompt("What's your name?");
+var player2 = new function () {
+	this.name = "";
+	this.livesLeft = 3;
+	this.loseALife = function() {
+		return this.livesLeft--;
+	}
 }
 
-//player1.name = getName();
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
-var num1 = 3;
-var num2 = 5;
+function getName(playerNum) {
+	return prompt("What's your name?" + playerNum);
+}
 
-while (player1.livesLeft > 0) {
-	var guess = prompt("What is " + num1 + " + " + num2 + "?");
-	if (Number(guess) == (num1+num2)) {
-		alert('right, lives left are: ' + player1.livesLeft);
+function genQuestion(opNum) {
+    var num1 = getRandomInt(1,20);
+    var num2 = getRandomInt(1,20);
+    var guess;
+    debugger;
+    switch(opNum) {
+        case 1:
+            guess = prompt("Your question is: " + num1 + " + " + num2);
+            if (Number(guess) == (num1+num2)) {
+                return true;
+            } else {
+                return false;
+            }
+            break;
+        case 2:
+            guess = prompt("Your question is: " + num1 + " - " + num2);
+            if (Number(guess) == (num1-num2)) {
+                return true;
+            } else {
+                return false;
+            }
+            break;
+        default:
+            guess = prompt("Your question is: " + num1 + " * " + num2);
+            if (Number(guess) == (num1*num2)) {
+                return true;
+            } else {
+                return false;
+            }
+            break;
+    }      
+}   
+player1.name = getName("player1");
+player2.name = getName("player2");
+var playerTurn = 1;
+
+while ((player1.livesLeft > 0)||(player2.livesLeft >0)) {
+	if (playerTurn == 1) {
+		playerTurn = 2;
+		var evalResponse = genQuestion(getRandomInt(1,3))
+		if (evalResponse == true) {
+			alert("Right! You still have " + player1.livesLeft + " left.");
+		} else {
+			player1.loseALife();
+			alert("Wrong! You now have " + player1.livesLeft + " left.");
+			if (player1.livesLeft == 0) {
+				alert("You lose the game!");
+			}
+		}
 	} else {
-		player1.loseALife();
-		alert('wrong, lives left are: ' + player1.livesLeft);
-		if (player1.livesLeft == 0) {
-			alert('game over. you lose');
+		playerTurn = 1;
+		var evalResponse = genQuestion(getRandomInt(1,3))
+		if (evalResponse == true) {
+			alert("Right! You still have " + player2.livesLeft + " left.");
+		} else {
+			player1.loseALife();
+			alert("Wrong! You now have " + player2.livesLeft + " left.");
+			if (player1.livesLeft == 0) {
+				alert("You lose the game!");
+			}
 		}
 	}
 }
