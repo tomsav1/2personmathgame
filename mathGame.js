@@ -26,7 +26,7 @@ function genQuestion(opNum) {
     var num1 = getRandomInt(1,20);
     var num2 = getRandomInt(1,20);
     var guess;
-    debugger;
+    
     switch(opNum) {
         case 1:
             guess = prompt("Your question is: " + num1 + " + " + num2);
