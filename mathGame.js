@@ -19,7 +19,7 @@ function getRandomInt(min, max) {
 }
 
 function getName(playerNum) {
-	return prompt("What's your name?" + playerNum);
+	return prompt("What's your name " + playerNum + "?");
 }
 
 function genQuestion(opNum) {
@@ -58,15 +58,15 @@ player1.name = getName("player1");
 player2.name = getName("player2");
 var playerTurn = 1;
 
-while ((player1.livesLeft > 0)||(player2.livesLeft >0)) {
+while ((player1.livesLeft > 0) && (player2.livesLeft > 0)) {
 	if (playerTurn == 1) {
 		playerTurn = 2;
 		var evalResponse = genQuestion(getRandomInt(1,3))
 		if (evalResponse == true) {
-			alert("Right! You still have " + player1.livesLeft + " left.");
+			alert("Right " + player1.name + "! You still have " + player1.livesLeft + " left.");
 		} else {
 			player1.loseALife();
-			alert("Wrong! You now have " + player1.livesLeft + " left.");
+			alert("Wrong " + player1.name + "! You now have " + player1.livesLeft + " left.");
 			if (player1.livesLeft == 0) {
 				alert("You lose the game!");
 			}
@@ -75,11 +75,11 @@ while ((player1.livesLeft > 0)||(player2.livesLeft >0)) {
 		playerTurn = 1;
 		var evalResponse = genQuestion(getRandomInt(1,3))
 		if (evalResponse == true) {
-			alert("Right! You still have " + player2.livesLeft + " left.");
+			alert("Right " + player2.name + "! You still have " + player2.livesLeft + " left.");
 		} else {
-			player1.loseALife();
-			alert("Wrong! You now have " + player2.livesLeft + " left.");
-			if (player1.livesLeft == 0) {
+			player2.loseALife();
+			alert("Wrong " + player2.name + "! You now have " + player2.livesLeft + " left.");
+			if (player2.livesLeft == 0) {
 				alert("You lose the game!");
 			}
 		}
