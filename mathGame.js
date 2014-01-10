@@ -7,7 +7,23 @@ var player1 = new function () {
 }
 
 function getName() {
-	return prompt("What's your name?")
+	return prompt("What's your name?");
 }
-debugger;
-player1.name = getName();
+
+//player1.name = getName();
+
+var num1 = 3;
+var num2 = 5;
+
+while (player1.livesLeft > 0) {
+	var guess = prompt("What is " + num1 + " + " + num2 + "?");
+	if (Number(guess) == (num1+num2)) {
+		alert('right, lives left are: ' + player1.livesLeft);
+	} else {
+		player1.loseALife();
+		alert('wrong, lives left are: ' + player1.livesLeft);
+		if (player1.livesLeft == 0) {
+			alert('game over. you lose');
+		}
+	}
+}
